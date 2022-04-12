@@ -40,21 +40,32 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
 
     public T getMax()
     {
-        return null;
+        checkInitialization();
+        T root = null;
+        if (!isEmpty())
+            root = heap[1];
+        return root;
     } // end getMax
 
     public boolean isEmpty()
     {
-        return false; // stub
+        return lastIndex < 1;
     } // end isEmpty
 
     public int getSize()
     {
-        return 0; // stub
+        return lastIndex;
     } // end getSize
 
     public void clear()
     {
+        checkInitialization();
+        while (lastIndex > -1)
+        {
+            heap[lastIndex] = null;
+            lastIndex--;
+        } // end while
+        lastIndex = 0;
     } // end clear
 
     // Throws an exception if the client requests a capacity that is too large.
@@ -65,7 +76,7 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
     } // end checkCapacity
 
     // Throws an exception if receiving object is not initialized.
-    private void checkInitialized() {
+    private void checkInitialization() {
         if (!initialized)
             throw new SecurityException("ArrayBag object is corrupt.");
     } // end checkIntegrity
