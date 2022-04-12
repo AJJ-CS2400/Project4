@@ -29,8 +29,34 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
         initialized = true;
     } // end constructor
 
+    public MaxHeapArray(T[] entries)
+    {
+        this(entries.length); // Call other constructor
+        assert initialized = true;
+
+        // Copy given array to data field
+        for (int index = 0; index < entries.length; index++)
+            heap[index + 1] = entries[index];
+
+        // Create heap
+        for (int rootIndex = lastIndex / 2; rootIndex > 0; rootIndex--)
+            reheap(rootIndex);
+    } // end constructor
+
     public void add(T newEntry)
     {
+        checkInitialization();
+        int newIndex = lastIndex + 1;
+        int parentIndex = newIndex / 2;
+        while ((parentIndex > 0) && newEntry.compareTo(heap[parentIndex]) > 0)
+        {
+            heap[newIndex] = heap[parentIndex];
+            newIndex = parentIndex;
+            parentIndex = newIndex / 2;
+        } // end while
+        heap[newIndex] = newEntry;
+        lastIndex++;
+        ensureCapacity();
     } // end add
 
     public T removeMax()
@@ -103,6 +129,18 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
         } // end while
         heap[rootIndex] = orphan;
     } // end reheap
+
+    // Doubles capacity of stack if limit is reached
+    private void ensureCapacity() {
+        if (lastIndex >= heap.length - 1) // If array is full, double its size
+        {
+            int newLength = 2 * heap.length;
+            checkCapacity(newLength);
+            @SuppressWarnings("unchecked")
+            T[] tempStack = (T[]) new Object[newLength];
+            heap = tempStack;
+        } // end if
+    } // end ensureCapacity
 
     // Throws an exception if the client requests a capacity that is too large.
     private void checkCapacity(int capacity) {
