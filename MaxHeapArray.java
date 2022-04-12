@@ -130,7 +130,7 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
         heap[rootIndex] = orphan;
     } // end reheap
 
-    // Doubles capacity of stack if limit is reached
+    // Doubles capacity of heap if limit is reached
     private void ensureCapacity() {
         if (lastIndex >= heap.length - 1) // If array is full, double its size
         {
@@ -145,13 +145,13 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
     // Throws an exception if the client requests a capacity that is too large.
     private void checkCapacity(int capacity) {
         if (capacity > MAX_CAPACITY)
-            throw new IllegalStateException("Attempt to create a bag whose capacity exceeds " +
+            throw new IllegalStateException("Attempt to create a heap whose capacity exceeds " +
                     "allowed maximum of " + MAX_CAPACITY);
     } // end checkCapacity
 
     // Throws an exception if receiving object is not initialized.
     private void checkInitialization() {
         if (!initialized)
-            throw new SecurityException("ArrayBag object is corrupt.");
+            throw new SecurityException("MaxHeapArray object is corrupt.");
     } // end checkIntegrity
 } // end MaxHeapArray
