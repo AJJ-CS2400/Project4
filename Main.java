@@ -26,19 +26,19 @@ public class Main
 
         // Output
         outputFile.print("Heap built using sequential insertions: ");
-        // stub. output first 10 integers of array
+        // output first 10 integers of array
         outputFile.print(sequentialHeap.output());
         outputFile.println("...");
 
         outputFile.print("Number of swaps in the heap creation: ");
-        // stub. output # of swaps
+        // output # of swaps
         outputFile.println(sequentialHeap.getSwapCounter());
 
         outputFile.print("Heap after 10 removals: ");
-        // stub. Perform 10 removals
+        // Perform 10 removals
         for(int i=0; i<10; i++)
             sequentialHeap.removeMax();
-        // stub. output first 10 integers of array
+        // output first 10 integers of array
         outputFile.print(sequentialHeap.output());
         outputFile.println("...");
         outputFile.close();
