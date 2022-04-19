@@ -20,7 +20,7 @@ public class Main
         FileWriter appendFile = new FileWriter("output.txt", true);
         PrintWriter outputFile = new PrintWriter(appendFile);
 
-        MaxHeapInterface<Integer> sequentialHeap = new MaxHeapArray<Integer>(100);
+        MaxHeapArray<Integer> sequentialHeap = new MaxHeapArray<Integer>(100);
         for(int i=0; i<100; i++)
             sequentialHeap.add(data[i]);
 
