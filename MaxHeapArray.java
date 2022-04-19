@@ -4,6 +4,7 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
 {
     private T[] heap;       // Array of heap entries
     private int lastIndex;  // Index of last entry
+    private int swapCounter = 0;
     private boolean initialized = false;
     private static final int DEFAULT_CAPACITY = 25;
     private static final int MAX_CAPACITY = 10000;
@@ -53,6 +54,7 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
             heap[newIndex] = heap[parentIndex];
             newIndex = parentIndex;
             parentIndex = newIndex / 2;
+            swapCounter++;
         } // end while
         heap[newIndex] = newEntry;
         lastIndex++;
@@ -104,6 +106,16 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
         lastIndex = 0;
     } // end clear
 
+    public int getSwapCounter(){return swapCounter;}
+    public String output()
+    {
+        String result = "";
+        for(int i=1; i<11; i++)
+        {
+            result += heap[i] + ",";
+        } // end for
+        return result;
+    } // end output
     private void reheap(int rootIndex)
     {
         boolean done = false;
@@ -136,9 +148,7 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
         {
             int newLength = 2 * heap.length;
             checkCapacity(newLength);
-            @SuppressWarnings("unchecked")
-            T[] tempStack = (T[]) new Object[newLength];
-            heap = tempStack;
+            heap = Arrays.copyOf(heap, newLength);
         } // end if
     } // end ensureCapacity
 

@@ -15,23 +15,32 @@ public class Main
         optimalMethod();
     } // end main
 
-    public static void sequentialInsertions() throws IOException
+    public static <T> void sequentialInsertions() throws IOException
     {
         FileWriter appendFile = new FileWriter("output.txt", true);
         PrintWriter outputFile = new PrintWriter(appendFile);
 
+        MaxHeapInterface<Integer> sequentialHeap = new MaxHeapArray<Integer>(100);
+        for(int i=0; i<100; i++)
+            sequentialHeap.add(data[i]);
+
         // Output
-        outputFile.println("Heap built using sequential insertions: ");
+        outputFile.print("Heap built using sequential insertions: ");
         // stub. output first 10 integers of array
-        outputFile.print("...");
+        outputFile.print(sequentialHeap.output());
+        outputFile.println("...");
 
-        outputFile.println("Number of swaps in the heap creation: ");
+        outputFile.print("Number of swaps in the heap creation: ");
         // stub. output # of swaps
+        outputFile.println(sequentialHeap.getSwapCounter());
 
-        outputFile.println("Heap after 10 removals: ");
+        outputFile.print("Heap after 10 removals: ");
         // stub. Perform 10 removals
+        for(int i=0; i<10; i++)
+            sequentialHeap.removeMax();
         // stub. output first 10 integers of array
-        outputFile.print("...");
+        outputFile.print(sequentialHeap.output());
+        outputFile.println("...");
         outputFile.close();
     } // end sequentialInsertions
 
