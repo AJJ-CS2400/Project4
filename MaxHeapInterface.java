@@ -6,6 +6,4 @@ public interface MaxHeapInterface<T extends Comparable<? super T>>
     public boolean isEmpty();
     public int getSize();
     public void clear();
-    public String output();
-    public int getSwapCounter();
 } // end MaxHeapInterface
