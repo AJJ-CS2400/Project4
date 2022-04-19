@@ -37,11 +37,16 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
 
         // Copy given array to data field
         for (int index = 0; index < entries.length; index++)
+        {
             heap[index + 1] = entries[index];
+        }
+        lastIndex = 100;
 
         // Create heap
         for (int rootIndex = lastIndex / 2; rootIndex > 0; rootIndex--)
+        {
             reheap(rootIndex);
+        }
     } // end constructor
 
     public void add(T newEntry)
@@ -116,6 +121,7 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
         } // end for
         return result;
     } // end output
+
     private void reheap(int rootIndex)
     {
         boolean done = false;
@@ -135,6 +141,7 @@ public final class MaxHeapArray<T extends Comparable <? super T>> implements Max
                 heap[rootIndex] = heap[largerChildIndex];
                 rootIndex = largerChildIndex;
                 leftChildIndex = 2 * rootIndex;
+                swapCounter++;
             }
             else
                 done = true;

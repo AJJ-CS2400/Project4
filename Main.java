@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main
 {
-    private static int[] data = new int[100]; // data from input file
+    private static Integer[] data = new Integer[100]; // data from input file
 
     public static void main(String[] args) throws IOException
     {
@@ -40,7 +40,7 @@ public class Main
             sequentialHeap.removeMax();
         // output first 10 integers of array
         outputFile.print(sequentialHeap.output());
-        outputFile.println("...");
+        outputFile.println("...\n");
         outputFile.close();
     } // end sequentialInsertions
 
@@ -49,18 +49,25 @@ public class Main
         FileWriter appendFile = new FileWriter("output.txt", true);
         PrintWriter outputFile = new PrintWriter(appendFile);
 
+        MaxHeapArray<Integer> optimalHeap = new MaxHeapArray<Integer>(data);
+
         // Output
-        outputFile.println("Heap built using optimal method: ");
-        // stub. output first 10 integers of array
-        outputFile.print("...");
+        outputFile.print("Heap built using optimal method: ");
+        // output first 10 integers of array
+        outputFile.print(optimalHeap.output());
+        outputFile.println("...");
 
-        outputFile.println("Number of swaps in the heap creation: ");
-        // stub. output # of swaps
+        outputFile.print("Number of swaps in the heap creation: ");
+        // output # of swaps
+        outputFile.println(optimalHeap.getSwapCounter());
 
-        outputFile.println("Heap after 10 removals: ");
-        // stub. Perform 10 removals
-        // stub. output first 10 integers of array
-        outputFile.print("...");
+        outputFile.print("Heap after 10 removals: ");
+        // Perform 10 removals
+        for(int i=0; i<10; i++)
+            optimalHeap.removeMax();
+        // output first 10 integers of array
+        outputFile.print(optimalHeap.output());
+        outputFile.println("...");
         outputFile.close();
     } // end optimalMethod
 
